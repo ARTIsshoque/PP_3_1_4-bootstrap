@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Please sign in</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" integrity="sha384-oOE/3m0LUMPub4kaC09mrdEhIc+e3exm4xOGxAmuFXhBNF4hcg/6MiAXAf5p0P56" crossorigin="anonymous" />
+</head>
+<body>
+<div class="container">
+    <form class="form-signin" method="post" th:action="@{/login}">
+        <h2 class="form-signin-heading fw-semibold">Please sign in</h2>
+        <div>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Email address" required autofocus>
+        </div>
+        <div>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        </div>
+        <input name="_csrf" type="hidden" value="FRlqyXn-jjqKpKADqSU-ks_o9TYxPwLLwI83NJuG8dUp5GPcJXgPqE_OuginnMI7nAgK9v-J2A4DCWDmoukDBq60lbcf3VC-" />
+        <button class="btn btn-lg btn-primary btn-block form-control" type="submit">Sign in</button>
+    </form>
+</div>
+</body></html>

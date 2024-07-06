@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+<div th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light text-lg-start p-2">
+        <div class="container-fluid">
+            <div>
+                <span class="fw-bold" th:text="${user.getUsername()}">email</span>
+                <span> with roles: </span>
+                <span th:each="role : ${user.getRoles()}" th:text="${role.name} + ' '">roleName</span>
+            </div>
+            <form th:action="@{/logout}" method="POST" th:object="${user.getId()}">
+                <button type="submit" class="text-secondary btn btn-lg btn-link text-decoration-none fw-semibold">Logout</button>
+            </form>
+        </div>
+    </nav>
+</div>
+
+</body>
+</html>
