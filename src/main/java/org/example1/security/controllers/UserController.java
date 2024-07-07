@@ -1,5 +1,6 @@
-package org.example1.security.web;
+package org.example1.security.controllers;
 
+import org.example1.security.model.User;
 import org.example1.security.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,7 @@ public class UserController {
 
     @GetMapping("/user")
     public String index(Model model, Principal principal) {
-        model.addAttribute("user", userService.findByUsername(principal.getName()));
+        model.addAttribute("user", userService.findByUsername(principal.getName()).orElse(new User()));
         return "user";
     }
 

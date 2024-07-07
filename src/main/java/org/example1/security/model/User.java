@@ -1,6 +1,7 @@
 package org.example1.security.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,6 +16,8 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @NotBlank(message = "email is required")
     @Column(unique = true, nullable = false)
     private String email;
 
@@ -26,6 +29,7 @@ public class User implements UserDetails {
 
     private Integer age;
 
+    @NotBlank(message = "password must be set")
     private String password;
 
     @ManyToMany

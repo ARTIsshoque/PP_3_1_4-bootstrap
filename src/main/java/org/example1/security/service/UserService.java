@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -45,8 +46,8 @@ public class UserService implements EntityService<User>, UserDetailsService {
     }
 
     @Override
-    public User findById(Long id) {
-        return userRepo.findById(id).orElse(null);
+    public Optional<User> findById(Long id) {
+        return userRepo.findById(id);
     }
 
     @Override
@@ -81,14 +82,11 @@ public class UserService implements EntityService<User>, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("User " + username + " not found.");
-        }
-        return user;
+        return userRepo.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found."));
     }
 
-    public User findByUsername(String username) {
+    public Optional<User> findByUsername(String username) {
         return userRepo.findByUsername(username);
     }
 }

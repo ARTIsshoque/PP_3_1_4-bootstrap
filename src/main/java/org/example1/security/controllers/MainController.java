@@ -1,5 +1,6 @@
-package org.example1.security.web;
+package org.example1.security.controllers;
 
+import jakarta.validation.Valid;
 import org.example1.security.model.User;
 import org.example1.security.service.RoleService;
 import org.example1.security.service.UserService;
@@ -24,7 +25,7 @@ public class MainController {
 
     @GetMapping("/")
     public String getIndex(ModelMap model, Principal principal) {
-        model.addAttribute("user", userService.findByUsername(principal.getName()));
+        model.addAttribute("user", userService.findByUsername(principal.getName()).orElse(new User()));
         model.addAttribute("users", userService.findAll());
         model.addAttribute("allRoles", roleService.findAll());
         model.addAttribute("newUser", new User());
@@ -32,19 +33,19 @@ public class MainController {
     }
 
     @PostMapping("add")
-    public String postAdd(@ModelAttribute("newUser") User user) {
+    public String postAdd(@Valid @ModelAttribute("newUser") User user) {
         userService.add(user);
         return "redirect:/admin/";
     }
 
     @PostMapping("delete")
-    public String postDelete(@RequestParam("id") Long id) {
+    public String postDelete(@Valid @RequestParam("id") Long id) {
         userService.delete(id);
         return "redirect:/admin/";
     }
 
     @PostMapping("update")
-    public String postEdit(@ModelAttribute("user") User user) {
+    public String postEdit(@Valid @ModelAttribute("user") User user) {
         userService.update(user);
         return "redirect:/admin/";
     }
